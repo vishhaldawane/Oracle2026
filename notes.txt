@@ -1,0 +1,542 @@
+Java
+		POPS	vs	OOPS
+		|		|
+	procedure<--data	data<--procedure
+	
+
+	object = data + functions (procedure)
+
+	Class				Object
+	|				|
+	it is the design	it is the instance
+	of the "object"		of a "class"
+
+	blue print of a
+	house			actual house(s)
+
+class ATM
+{
+	private int atmHitCount;
+	private void scanTheUserFace() { }
+	private class Authenticate { 
+		void autherize() { }
+	}
+	public int getHitCount() { }
+
+	public class acceptPin() {
+		Authenticate a = ...
+		a.autherize();
+	}
+	public void withdraw(float amt) { }
+}
+
+
+OOPS Concepts
+-------------
+1. Abstraction
+	-It is the "what is?" part of an object
+	-Hiding the complexity of an object
+	-data abstraction
+	-procedural abstraction
+	-class abstraction
+
+2. Encapsulation
+	It is the "how is it?" part of an object
+	Coding for the complexity of an object
+	- data encapsulation
+		private data
+	- procedure encapsulation	
+		private functions/methods/procedures
+	- class encapsulation
+		private inner classes
+	
+	IBM	Sun	Hp	 Apple		Intel
+	BB	Fire	hpseries powerpc	x86
+	<-------server edition--------->	client
+	AIX	Solaris hpux	 macintosh	windows
+	JVM	JVM	JVM	 JVM		JVM
+	.class	->	->	->		->
+	|
+	.java
+	
+3. Polymorphism
+
+	ability of a business entity to
+	acquire mulitple forms
+
+	a. class extension
+	b. function overloading
+		- type of parameter
+		- number of parameter
+		- sequence of type of para
+		class Phone
+		{
+			void dial() { }
+			void dial(byte b) {} 
+			void dial(String herName){}
+			void dial(String n1,String n2){}
+			void dial(byte b, String s) { }
+			void dial(String s, byte b) { }
+
+		}
+			Phone p = new Phone();
+			p.dial("jane","julie","juliet");
+
+			Doctor x = new Doctor();
+			x.diagnose(); // Doctor::diagnose();
+
+			x = new Surgeon();
+			
+			x.diagnose(); // Doctor::diagnose();
+
+			x = new HeartSurgeon();
+
+			x.diagnose(); // Doctor::diagnose();
+
+		Scanner s = new Scanner(System.in);	
+		Doctor x = Hospital.inviteDoctor(s.next()); <- gp/s/hs
+			x.diagnose();
+
+class Hospital
+{	
+	static Doctor inviteDoctor(String hint) {
+		Doctor x = null;
+		if(hint.equals("gp")) {
+			x = new Doctor();
+		else
+			if(hint.equals("s")) {
+				x = new Surgeon();
+			else
+				if(hint.equals("hs")) {
+					x = new HeartSurgeon();
+		return x;
+
+	}
+}
+		sop(10+20+" sum "+10+20);
+		      |  |
+		binary+  |
+			 |
+		convert 30 into "30"
+		and then concat it with " sum "
+		and produces "30 sum "
+
+
+
+
+
+
+
+
+	c. function overriding
+		class Doctor { 
+			void diagnose() {
+				check ENT
+			}
+		}
+		class Surgeon extends Doctor {
+			void diagnose() {
+				check ENT + CT
+			}
+		}
+		class HeartSurgeon extends Surgeon{
+			void diagnose() {
+			  check ENT + CT + CG
+			}
+		}
+class Account
+{
+	withdraw(float amt) {
+		bal-=amt;
+	}
+}
+class SavingsAccount extends Account
+{
+	withdraw(float amt) {
+		check the min bal
+		+ super.withdraw(amt);
+	}
+}
+class FixedDepositAccount extends SavingsAccount
+{
+	withdraw(float amt) {
+		check the account maturity date
+		+ super.withdraw(amt);
+	}
+}
+
+
+
+
+
+
+	
+	d. operator overloading	
+		Sop(10+20+" sum is "+10+20);
+
+4. Inheritance
+
+
+	derivation		vs		implementation
+	|					|
+	regular classes				abstract classes/interfaces
+	|					|
+	methods defined				methods declared
+
+
+
+	Object
+	|11 methods
+	| equals, hashCode
+	| wait,wait,wait, notify,notifyAll
+	| finalize, clone
+	| toString, getClass
+	| 
+	Account
+	|acno,name,bal
+	| withdraw,deposit
+	| 
+	B
+	
+
+	A
+	|
+	B
+	|
+	C
+
+	A<-class	B<-- interface
+	|fun(){}	|foo();
+	|far(){}	|
+	------------------
+	    |
+	    C <-- C class is an implementation of class/interface B
+	    | far() { }
+	    | fee() { }
+
+below lines are in C's point of view
+
+	1. fee(){} - exclusive method of C
+	2. fun(){} - inherited from the parent
+	3. far(){} - inherited - cum - overridden - not mandatory to override
+	4. foo(){} - mandatory - implemented
+
+
+an abstract child may forward the contract of its abstract parent
+to its child
+
+	A <-- abstract/interface
+	| fun();
+	|
+	B <-- abstract/interface
+	| foo();
+	|
+	C <-- a non-abstract child class 
+		MUST fulfill the contract of B and A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Spring REST
+----------
+1. database - normalized tables
+2. pojo - plain old java object [ java beans ]
+		
+3. repository
+4. service
+5. controller
+6. UI / react/angular/js
+
+
+What is a java bean [ component ] 
+
+1. declared in a package
+2. it must be public
+3. must have data as private
+4. must have no-arg public ctor
+5. must have set/get methods
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+5. Object communication
+
+	class Person
+	{
+		void getCashFromBank(float amt)
+		{
+		
+		Receipt r= new Receipt(343,amt,sign);
+		Account a = db.fetch(r);
+		a.withdraw(amt);
+		}		
+	}
+	class Account
+	{
+		void withdraw(float amt)
+		{
+
+		}
+	}
+
+
+		Association
+			|
+	---------------------------------
+	|	|		|	|
+	isA	hasA		usesA	producesA
+	structural		operational/functional
+
+class Drum { }
+class WashingDrum extends Drum { //isA
+	void spin() {
+	
+	}
+}
+class Machine { }
+class WashingMachine extends Machine //isA
+{
+	WashingDashBoard board = new WashingDashBoard(); //hasA
+	WashingDrum  wd = new WashingDrum(); //hasA
+	OutputPipe op = new OutputPipe();
+	
+
+//producesA			usesA	uessA		usesA	usesA
+	Laundry  wash(WashingPowder wp, Cloth cl[], Water w, Electricity e)
+	{
+		wd.spin();
+		Laundry l = new Laundry(..,..,..);
+		return l;	
+	}
+}
+class Daughter
+{
+
+}
+class DaughterInLaw extends Daughter  //isA
+{
+	WashingMachine wm = new WashingMachine();//hasA
+
+	void washTheCloth()
+	{
+		wm.wash();
+	}
+
+}
+
+
+
+
+	Threading 
+
+
+		Bank
+	
+database
+101 Suresh 50000
+102
+103
+...
+				cash deposit counter
+
+		teller1		teller2		teller3
+		|		|		|
+		getBal()	getBal()	getBal()
+		|		|		|
+		calcAmt()	calcAmt()	calcAmt()
+		|		|		|
+		setBal()	setBal()	setBal()
+		|		|		|
+		customer1	customer2	customer3
+		10:30		10:30		10:30
+	acno	101		102		103
+	amt	5000		7000		8000
+	deno	100/-		200/-		500/-
+	cnt	50		35		16	
+
+
+
+
+
+		   Runnable
+			|run(); <--declared		  Mixer
+		----------------------------------------+  | mix()
+		|					|  |
+		Thread					Juicer
+		|  run() { } <-- defined <-------+
+		|				 |
+		|  start() {} --->talks with TS--+
+		-------------------
+		|	|	|
+		Car	Train	Flight
+
+	I. by extending Thread class
+
+		a. extend from Thread class
+		b. override run() method ( and write ur logic)
+		c. create object of your class of step a
+		d. invoke the start() method of your object
+			which will inturn invokes your run()
+
+	II. by implementing Runnable interface
+
+		a. implement from java.lang.Runnable interface
+		b. mandatorily define the run() method of it
+		c. create object of your class of step a
+		d. create object of java.lang.Thread class and pass
+			 your object of step a into its ctor
+
+		e. invoke java.lang.Thread's object start() method
+			which will invoke your run() method
+
+	
+		
+
+	Collection
+
+				Java
+				|
+	-------------------------------------------------
+	|			|			|
+	JSE			JEE			JME
+	|			|			|micro
+ core java		------------------
+ lang fundas		|		|
+ packages		WEB		EJB
+ oops concepts		|		|
+ exception		Servlets	--------------------
+ threading		JSP		|	|	|
+ collection			   Stateless Stateful	Message
+ jdbc
+ lambda
+ file i/o
+ socket
+ web
+
+				Machine1 [ SERVER ]
+				Java1 | resource
+				|
+			------------
+			| 
+		   Machine2 [ thin CLIENT ]
+		Browser | Chrome | URL
+		http://ip:port/resource
+
+
+
+			File I/O
+
+	input  = read from a source
+        output = write to a target
+
+	+---------input-------->Java program------output----+
+	|			    |			    |
+	keyboard	       ------------		monitor
+	stdin		      i|o	i|o		stdout
+			   files      socket
+
+
+class ending with word 'Stream'
+is from byte based category
+
+
+	byte base stream		 |	character based stream
+	ASCII - 256			 |	UNICODE 65535
+	english				 | international 
+	unit of reading is 1 byte	 | unit of reading is 2 bytes
+	Vishal				 | विशाल 
+--------------------------------------------------------------------------
+	InputStream	OutputStream	 |	Reader		Writer
+--------------------------------------------------------------------------
+  FileInputStream	FileOutputStream |	FileReader	FileWriter
+--------------------------------------------------------------------------
+					 |
+--------------------------------------------------------------------------
+					 |
+--------------------------------------------------------------------------
+
+
+
+
+Enterprise application features
+---------------------------
+1. Remote capability
+2. high availability
+3. multithreading
+4. pooling of resources - common resources used by all
+5. caching of resources
+6. transaction management
+7. security management
+
+
+
+
+
+i dont know, that what i dont know - 
+
+i      know, that what i dont know
+
+i dont know, that what i      know
+
+i      know, that what i      know
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
