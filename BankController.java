@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.BankAccount;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,8 +51,16 @@ public class BankController {
         if(found) {
             return ResponseEntity.ok(bankAccountFound);
         }else {
-            return ResponseEntity.notFound().build();
+            //return ResponseEntity.notFound().build();
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Error: The account number " + id + " does not exist");
         }
+
+      //  return userService.findById(id)
+       //         .orElseThrow(() ->
+         //               new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    
     }
 
 }
