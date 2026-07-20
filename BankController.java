@@ -3,10 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.BankAccount;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +57,103 @@ public class BankController {
       //  return userService.findById(id)
        //         .orElseThrow(() ->
          //               new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-    
+
     }
 
+    @PostMapping("/account/add")
+    public ResponseEntity<?> addOneAccount(@RequestBody BankAccount bankAccount ) {
+        BankAccount bankAccountFound = null;
+        boolean found = false;
+
+        int idToSearch = bankAccount.getAccountNumber();
+
+        for (BankAccount bankAccountObj : bankAccountList) {
+            if(idToSearch == bankAccountObj.getAccountNumber()) {
+                found=true;
+                break;
+            }
+        }
+        if(found) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Error: The account number " + bankAccount.getAccountNumber() + " already exist");
+
+        }else {
+            //return ResponseEntity.notFound().build();
+            bankAccountList.add(bankAccount);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body("The account number " + bankAccount.getAccountNumber()+ " created");
+
+        }
+
+
+    }
+
+    @PutMapping("/account/update")
+    public ResponseEntity<?> updateOneAccount(@RequestBody BankAccount bankAccount ) {
+        BankAccount bankAccountFound = null;
+        boolean found = false;
+
+        int idToSearch = bankAccount.getAccountNumber();
+
+        for (BankAccount bankAccountObj : bankAccountList) {
+            if(idToSearch == bankAccountObj.getAccountNumber()) {
+                bankAccountFound = bankAccountObj;
+                found=true;
+                break;
+            }
+        }
+        if(found) {
+            bankAccountList.remove(bankAccountFound);
+            bankAccountList.add(bankAccount);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body("The account object " + bankAccount.getAccountNumber()+ " updated");
+
+        }else {
+
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Error: The account number " + bankAccount.getAccountNumber() + " does not exist");
+
+            //return ResponseEntity.notFound().build();
+
+        }
+
+
+
+    }
+
+
+    @DeleteMapping("/account/delete/{id}")
+    public ResponseEntity<?> updateOneAccount(@PathVariable String id ) {
+        BankAccount bankAccountFound = null;
+        boolean found = false;
+
+        int idToSearch = Integer.parseInt(id);
+
+        for (BankAccount bankAccountObj : bankAccountList) {
+            if (idToSearch == bankAccountObj.getAccountNumber()) {
+                bankAccountFound = bankAccountObj;
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            bankAccountList.remove(bankAccountFound);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body("The account object " + idToSearch + " removed");
+
+        } else {
+
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Error: The account number " + idToSearch + " does not exist");
+
+            //return ResponseEntity.notFound().build();
+
+        }
+    }
 }
